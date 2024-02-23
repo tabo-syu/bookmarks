@@ -1,0 +1,32 @@
+<%= form_with model: bookmark do |form| %>
+  <div>
+    <%= form.label :title %>:
+    <%= form.text_field :title %>
+    <% bookmark.errors.full_messages_for(:title).each do |message| %>
+      <div>
+        <%= message %>
+      </div>
+    <% end %>
+  </div>
+  <div>
+    <%= form.label :url %>:
+    <%= form.text_field :url %>
+    <% bookmark.errors.full_messages_for(:url).each do |message| %>
+      <div>
+        <%= message %>
+      </div>
+    <% end %>
+  </div>
+  <div>
+    <%= form.label :description %>:
+    <%= form.text_field :description %>
+    <% bookmark.errors.full_messages_for(:description).each do |message| %>
+      <div>
+        <%= message %>
+      </div>
+    <% end %>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

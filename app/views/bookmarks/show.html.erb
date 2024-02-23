@@ -1,0 +1,14 @@
+<h1><%= @bookmark.title %></h1>
+<p><%= @bookmark.url %></p>
+<p><%= @bookmark.description %></p>
+<ul>
+  <li>
+    <%= link_to "Edit", edit_bookmark_path(@bookmark) %>
+  </li>
+  <li>
+    <%= link_to "Destroy", bookmark_path(@bookmark), data: {
+      turbo_method: :delete,
+      turbo_confirm: "Are you sure?"
+    } %>
+  </li>
+</ul>

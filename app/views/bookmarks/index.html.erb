@@ -1,0 +1,17 @@
+<h1>Bookmarks</h1>
+
+<%= link_to "New Bookmark", new_bookmark_path %>
+
+<% @bookmarks.each do |bookmark| %>
+  <ul>
+    <li>
+      url: <%= bookmark.url %>
+    </li>
+    <li>
+      <%= link_to 'title: ' + bookmark.title, bookmark %>
+    </li>
+    <li>
+      description: <%= bookmark.description %>
+    </li>
+  </ul>
+<% end %>
