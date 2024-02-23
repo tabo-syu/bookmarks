@@ -12,3 +12,19 @@
     } %>
   </li>
 </ul>
+<h2>Comments:</h2>
+<ul>
+  <% @bookmark.comments.each do |comment| %>
+    <li><span style="font-weight: bold"><%= comment.body %></span></li>
+  <% end %>
+</ul>
+<h2>Add a comment:</h2>
+<%= form_with model: [@bookmark, @bookmark.comments.build] do |form| %>
+  <p>
+    <%= form.label :body %>
+    <%= form.text_area :body %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
