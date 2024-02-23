@@ -1,0 +1,22 @@
+<h1>Home</h1>
+<h2><%= link_to 'Bookmarks', bookmarks_path %></h2>
+<% @bookmarks.each do |bookmark| %>
+  <ul>
+    <li>url: <%= bookmark.url %></li>
+    <li><%= link_to 'title: ' + bookmark.title, bookmark %></li>
+    <li>description: <%= bookmark.description %></li>
+  </ul>
+<% end %>
+<h2><%= link_to 'Tags', tags_path %></h2>
+<% @tags.each do |tag| %>
+  <ul>
+    <li><%= link_to 'title: ' + tag.name, tag %></li>
+    <li>color: <%= tag.color %></li>
+  </ul>
+<% end %>
+<h2>Comments</h2>
+<% @comments.each do |comment| %>
+  <ul>
+    <li><%= link_to "#{comment.bookmark.title}: #{comment.body}", comment.bookmark %></li>
+  </ul>
+<% end %>
