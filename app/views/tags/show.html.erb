@@ -1,0 +1,18 @@
+<h1><%= @tag.name %></h1>
+<p><%= @tag.color %></p>
+<ul>
+  <li><%= link_to "Edit", edit_tag_path(@tag) %></li>
+  <li>
+    <%= link_to "Destroy", tag_path(@tag), data: {
+      turbo_method: :delete,
+      turbo_confirm: "Are you sure?"
+    } %>
+  </li>
+</ul>
+<% @tag.bookmarks.each do |bookmark| %>
+  <ul>
+    <li>URL: <%= bookmark.url %></li>
+    <li>Title: <%= bookmark.title %></li>
+    <li>Description: <%= bookmark.description %></li>
+  </ul>
+<% end %>

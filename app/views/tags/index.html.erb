@@ -1,0 +1,18 @@
+<h1>Tags</h1>
+<%= link_to "New Tag", new_tag_path %>
+<% @tags.each do |tag| %>
+  <ul>
+    <li><%= link_to 'name: ' + tag.name, tag %></li>
+    <li>color: <%= tag.color %></li>
+    <dl>
+      <dt>Bookmarks:</dt>
+      <% tag.bookmarks.each do |bookmark| %>
+        <ul>
+          <li>url: <%= bookmark.url %></li>
+          <li>title: <%= bookmark.title %></li>
+          <li>description: <%= bookmark.description %></li>
+        </ul>
+      <% end %>
+    </dl>
+  </ul>
+<% end %>
