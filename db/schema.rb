@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 20_240_223_120_945) do
+ActiveRecord::Schema[7.1].define(version: 20_240_223_143_416) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -24,15 +24,15 @@ ActiveRecord::Schema[7.1].define(version: 20_240_223_120_945) do
   end
 
   create_table 'bookmarks', force: :cascade do |t|
-    t.text 'url'
-    t.text 'title'
-    t.text 'description'
+    t.text 'url', null: false
+    t.text 'title', null: false
+    t.text 'description', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
   end
 
   create_table 'comments', force: :cascade do |t|
-    t.text 'body'
+    t.text 'body', null: false
     t.bigint 'bookmark_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
@@ -40,8 +40,8 @@ ActiveRecord::Schema[7.1].define(version: 20_240_223_120_945) do
   end
 
   create_table 'tags', force: :cascade do |t|
-    t.string 'name'
-    t.string 'color'
+    t.string 'name', null: false
+    t.string 'color', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
   end
