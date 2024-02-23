@@ -16,6 +16,12 @@
 <ul>
   <% @bookmark.comments.each do |comment| %>
     <li><span style="font-weight: bold"><%= comment.body %></span></li>
+    <p>
+      <%= link_to "Destroy Comment", [comment.bookmark, comment], data:{
+        turbo_method: :delete,
+        turbo_confirm: "Are you sure?"
+      } %>
+    </p>
   <% end %>
 </ul>
 <h2>Add a comment:</h2>
