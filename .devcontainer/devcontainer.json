@@ -52,8 +52,9 @@
 				},
 			},
 			"extensions": [
-				"Shopify.ruby-lsp",
-				"redhat.vscode-yaml"
+				"aliariff.vscode-erb-beautify",
+				"redhat.vscode-yaml",
+				"Shopify.ruby-lsp"
 			]
 		}
 	}
