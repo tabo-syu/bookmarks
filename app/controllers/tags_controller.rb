@@ -3,7 +3,7 @@ class TagsController < ApplicationController
 
   # Read
   def index
-    @tags = Tag.all
+    @tags = Tag.preload(:bookmarks)
   end
 
   def show

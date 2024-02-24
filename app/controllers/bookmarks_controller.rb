@@ -3,7 +3,7 @@ class BookmarksController < ApplicationController
 
   # Read
   def index
-    @bookmarks = Bookmark.all
+    @bookmarks = Bookmark.preload(:tags)
   end
 
   def show
