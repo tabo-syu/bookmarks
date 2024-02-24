@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 20_240_224_111_641) do
+ActiveRecord::Schema[7.1].define(version: 20_240_224_123_551) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -20,6 +20,8 @@ ActiveRecord::Schema[7.1].define(version: 20_240_224_111_641) do
     t.text 'description', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.bigint 'user_id', null: false
+    t.index ['user_id'], name: 'index_bookmarks_on_user_id'
   end
 
   create_table 'bookmarks_tags', id: false, force: :cascade do |t|
@@ -34,7 +36,9 @@ ActiveRecord::Schema[7.1].define(version: 20_240_224_111_641) do
     t.bigint 'bookmark_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.bigint 'user_id', null: false
     t.index ['bookmark_id'], name: 'index_comments_on_bookmark_id'
+    t.index ['user_id'], name: 'index_comments_on_user_id'
   end
 
   create_table 'tags', force: :cascade do |t|
@@ -42,6 +46,8 @@ ActiveRecord::Schema[7.1].define(version: 20_240_224_111_641) do
     t.string 'color', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.bigint 'user_id', null: false
+    t.index ['user_id'], name: 'index_tags_on_user_id'
   end
 
   create_table 'users', force: :cascade do |t|
@@ -56,5 +62,8 @@ ActiveRecord::Schema[7.1].define(version: 20_240_224_111_641) do
     t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
   end
 
+  add_foreign_key 'bookmarks', 'users'
   add_foreign_key 'comments', 'bookmarks'
+  add_foreign_key 'comments', 'users'
+  add_foreign_key 'tags', 'users'
 end

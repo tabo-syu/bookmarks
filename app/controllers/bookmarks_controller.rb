@@ -1,4 +1,6 @@
 class BookmarksController < ApplicationController
+  before_action :authenticate_user!, except: %i[index show]
+
   # Read
   def index
     @bookmarks = Bookmark.all
@@ -14,7 +16,7 @@ class BookmarksController < ApplicationController
   end
 
   def create
-    @bookmark = Bookmark.new(bookmark_params)
+    @bookmark = current_user.bookmarks.new(bookmark_params)
 
     if @bookmark.save
       redirect_to @bookmark
@@ -25,11 +27,11 @@ class BookmarksController < ApplicationController
 
   # Update
   def edit
-    @bookmark = Bookmark.find(params[:id])
+    @bookmark = current_user.bookmarks.find(params[:id])
   end
 
   def update
-    @bookmark = Bookmark.find(params[:id])
+    @bookmark = current_user.bookmarks.find(params[:id])
 
     if @bookmark.update(bookmark_params)
       redirect_to @bookmark
@@ -40,7 +42,7 @@ class BookmarksController < ApplicationController
 
   # Delete
   def destroy
-    @bookmark = Bookmark.find(params[:id])
+    @bookmark = current_user.bookmarks.find(params[:id])
     @bookmark.destroy
 
     redirect_to root_path, status: :see_other

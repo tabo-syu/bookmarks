@@ -1,4 +1,6 @@
 class TagsController < ApplicationController
+  before_action :authenticate_user!, except: %i[index show]
+
   # Read
   def index
     @tags = Tag.all
@@ -14,7 +16,7 @@ class TagsController < ApplicationController
   end
 
   def create
-    @tag = Tag.new(tag_params)
+    @tag = current_user.tags.new(tag_params)
 
     if @tag.save
       redirect_to @tag
@@ -25,11 +27,11 @@ class TagsController < ApplicationController
 
   # Update
   def edit
-    @tag = Tag.find(params[:id])
+    @tag = current_user.tags.find(params[:id])
   end
 
   def update
-    @tag = Tag.find(params[:id])
+    @tag = current_user.tags.find(params[:id])
 
     if @tag.update(tag_params)
       redirect_to @tag
@@ -40,7 +42,7 @@ class TagsController < ApplicationController
 
   # Delete
   def destroy
-    @tag = Tag.find(params[:id])
+    @tag = current_user.tags.find(params[:id])
     @tag.destroy
 
     redirect_to root_path, status: :see_other
