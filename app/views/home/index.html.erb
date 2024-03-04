@@ -1,22 +1,32 @@
-<h1>Home</h1>
-<h2><%= link_to 'Bookmarks', bookmarks_path %></h2>
-<% @bookmarks.each do |bookmark| %>
-  <ul>
-    <li>url: <%= bookmark.url %></li>
-    <li><%= link_to 'title: ' + bookmark.title, bookmark %></li>
-    <li>description: <%= bookmark.description %></li>
-  </ul>
-<% end %>
-<h2><%= link_to 'Tags', tags_path %></h2>
-<% @tags.each do |tag| %>
-  <ul>
-    <li><%= link_to 'title: ' + tag.name, tag %></li>
-    <li>color: <%= tag.color %></li>
-  </ul>
-<% end %>
-<h2>Comments</h2>
-<% @comments.each do |comment| %>
-  <ul>
-    <li><%= link_to "#{comment.bookmark.title}: #{comment.body}", comment.bookmark %></li>
-  </ul>
-<% end %>
+<h1 class="mb-2">ブックマーク一覧</h1>
+<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xxl-4 g-2">
+  <% @bookmarks.each do |bookmark| %>
+    <div class="col">
+      <article class="card h-100">
+        <%= link_to bookmark do %>
+          <img src="https://cs1.animestore.docomo.ne.jp/anime_kv/img/21/82/6/21826_1_9_8b.png?1551424077000" class="card-img-top" alt="<%= bookmark.description %>">
+        <% end %>
+        <div class="card-body d-flex flex-column justify-content-between">
+          <div class="mb-3">
+            <h2 class="card-title fs-4 text-body-emphasis" style="display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 3;"><%= bookmark.title %></h2>
+            <p class="card-subtitle mb-3" style="font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+              <a class="text-body-tertiary" href="<%= bookmark.url%>" target="_blank"><%= bookmark.url %></a>
+            </p>
+            <p class="card-text small"><%= bookmark.description %></p>
+          </div>
+          <div>
+            <% bookmark.tags.each do |tag| %>
+              <span class="badge text-bg-secondary fw-light">
+                <%= link_to tag.name, tag, class: ['link-body-emphasis', 'link-underline-opacity-0', 'link-underline-opacity-75-hover'] %>
+              </span>
+            <% end %>
+          </div>
+        </div>
+        <div class="card-footer text-end" style="font-size: 12px">
+          <span class="small"><%= bookmark.user.email %></span>
+          <time datetime="<%= bookmark.created_at %>" class="small"><%= bookmark.created_at %></time>
+        </div>
+      </article>
+    </div>
+  <% end %>
+</div>

@@ -1,7 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @bookmarks = Bookmark.all
-    @tags = Tag.all
-    @comments = Comment.all
+    @bookmarks = Bookmark.includes(%i[tags user])
   end
 end
