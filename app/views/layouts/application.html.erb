@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja" data-bs-theme="dark">
   <head>
     <title>Bookmarks</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -9,9 +9,15 @@
     <%= javascript_importmap_tags %>
   </head>
   <body>
-    <%= render "header", user: @user %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <section class="container py-3">
+      <%= render "header", user: @user %>
+      <% if flash[:notice] %>
+        <div class="alert alert-info" role="alert"><%= notice %></div>
+      <% end %>
+      <% if flash[:alert] %>
+        <div class="alert alert-warning" role="alert"><%= alert %></div>
+      <% end %>
+      <%= yield %>
+    </section>
   </body>
 </html>
