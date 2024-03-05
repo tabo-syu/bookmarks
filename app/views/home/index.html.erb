@@ -1,4 +1,4 @@
-<h1 class="mb-2">ブックマーク一覧</h1>
+<h1 class="mb-3">ブックマーク一覧</h1>
 <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xxl-4 g-2">
   <% @bookmarks.each do |bookmark| %>
     <div class="col">
@@ -10,7 +10,7 @@
           <div class="mb-3">
             <h2 class="card-title fs-4 text-body-emphasis" style="display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 3;"><%= bookmark.title %></h2>
             <p class="card-subtitle mb-3" style="font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-              <a class="text-body-tertiary" href="<%= bookmark.url%>" target="_blank"><%= bookmark.url %></a>
+              <a class="text-secondary-emphasis" href="<%= bookmark.url%>" target="_blank"><%= bookmark.url %></a>
             </p>
             <p class="card-text small"><%= bookmark.description %></p>
           </div>
@@ -22,9 +22,9 @@
             <% end %>
           </div>
         </div>
-        <div class="card-footer text-end" style="font-size: 12px">
-          <span class="small"><%= bookmark.user.email %></span>
-          <time datetime="<%= bookmark.created_at %>" class="small"><%= bookmark.created_at %></time>
+        <div class="card-footer text-end" style="font-size: 10px">
+          <span class="mr-1"><%= bookmark.user.email %></span>
+          <time datetime="<%= bookmark.created_at.to_datetime.iso8601 %>"><%= l bookmark.created_at %></time>
         </div>
       </article>
     </div>
