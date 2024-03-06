@@ -1,38 +1,47 @@
-<h1>URL: <%= @bookmark.url %></h1>
-<p>Title: <%= @bookmark.title %></p>
-<p>Description: <%= @bookmark.description %></p>
-<dl>
-  <dt>Tags:</dt>
-  <% @bookmark.tags.each do |tag| %>
-    <dd><%= tag.name %>:<%= tag.color %></dd>
+<section class="p-5 mb-5 bg-body-tertiary border rounded-3">
+  <div class="container-fluid py-5">
+    <div class="mb-3">
+      <h1 class="display-5 fw-bold my-0 text-body-emphasis"><%= @bookmark.title %></h1>
+      <a class="text-body-tertiary" href="<%= @bookmark.url %>" target="_blank"><%= @bookmark.url %></a>
+    </div>
+    <p class="col-md-8 fs-5 mb-0"><%= @bookmark.description %></p>
+    <div class="d-lg-flex justify-content-between align-items-center mt-4">
+      <div>
+        <% @bookmark.tags.each do |tag| %>
+          <span class="badge text-bg-secondary">
+            <%= link_to tag.name, tag, class: ['link-body-emphasis', 'link-underline-opacity-0', 'link-underline-opacity-75-hover'] %>
+          </span>
+        <% end %>
+      </div>
+      <div class="mt-2 mt-lg-0 text-end">
+        <p class="my-0 text-body-tertiary small"><%= @bookmark.user.email %> が <%= l @bookmark.created_at %> に登録</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <% if @bookmark.comments.length > 1 %>
+    <h2>ブックマークへのコメント</h2>
+    <div class="list-group list-group-flush mb-3">
+      <% @bookmark.comments.each do |comment| %>
+        <article class="list-group-item py-4">
+          <dl class="mb-0">
+            <dt class="mb-3"><%= comment.user.email %><span class="ms-2 text-body-tertiary small fw-normal">(<%= l comment.created_at %>)</span></dt>
+            <dd class="small lh-lg mb-0"><%= comment.body %></dd>
+          </dl>
+        </article>
+      <% end %>
+    </div>
   <% end %>
-</dl>
-<div>
-  <%= link_to "Edit", edit_bookmark_path(@bookmark) %>
-  <%= link_to "Destroy", bookmark_path(@bookmark), data: {
-    turbo_method: :delete,
-    turbo_confirm: "Are you sure?"
-  } %>
-</div>
-<h2>Comments:</h2>
-<ul>
-  <% @bookmark.comments.each do |comment| %>
-    <li><span style="font-weight: bold"><%= comment.body %></span></li>
-    <p>
-      <%= link_to "Destroy Comment", [comment.bookmark, comment], data:{
-        turbo_method: :delete,
-        turbo_confirm: "Are you sure?"
-      } %>
-    </p>
-  <% end %>
-</ul>
-<h2>Add a comment:</h2>
-<%= form_with model: [@bookmark, @bookmark.comments.build] do |form| %>
-  <p>
-    <%= form.label :body %>
-    <%= form.text_area :body %>
-  </p>
-  <p>
-    <%= form.submit %>
-  </p>
-<% end %>
+  <h3 class="mb-3">コメントを投稿する</h3>
+  <div>
+    <%= form_with model: [@bookmark, @bookmark.comments.build] do |form| %>
+      <div class="mb-2">
+        <%= form.text_area :body, class: ["form-control", "form-control-sm"], rows: 5, placeholder: "コメントを入力してください" %>
+      </div>
+      <div class="text-end">
+        <%= form.submit "投稿する" %>
+      </div>
+    <% end %>
+  </div>
+</section>

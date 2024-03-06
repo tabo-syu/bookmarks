@@ -7,7 +7,7 @@ class BookmarksController < ApplicationController
   end
 
   def show
-    @bookmark = Bookmark.find(params[:id])
+    @bookmark = Bookmark.preload(comments: :user).find(params[:id])
   end
 
   # Create
