@@ -1,8 +1,8 @@
 <header class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
   <h1><%= link_to "Bookmarks", root_path, class: ['text-decoration-none', 'link-body-emphasis'] %></h1>
   <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-    <% if user %>
-      <span class="me-3 py-1 body-emphasis"><%= user.email %></span>
+    <% if current_user %>
+      <span class="me-3 py-1 body-emphasis"><%= user.name %></span>
       <%= link_to "ログアウト", destroy_user_session_path, class: ['py-1', 'text-decoration-none', 'link-body-emphasis'], data: {
         turbo_method: :delete
       } %>

@@ -1,10 +1,14 @@
 <div style="max-width: 540px" class="m-auto">
-  <h1 class="h3 mb-3 fw-normal">Sign up</h1>
+  <h1 class="h3 mb-3 fw-normal">ユーザー登録</h1>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
     <div class="form-floating mb-3">
       <%= f.email_field :email, autofocus: true, autocomplete: "email", class: ["form-control"] %>
       <%= f.label :email %>
+    </div>
+    <div class="form-floating mb-3">
+      <%= f.text_field :name, autofocus: true, class: ["form-control"] %>
+      <%= f.label :name, "ユーザー名" %>
     </div>
     <div class="form-floating mb-1">
       <%= f.password_field :password, autocomplete: "new-password", class: ["form-control"] %>
