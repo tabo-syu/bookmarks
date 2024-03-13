@@ -1,4 +1,7 @@
-<h1 class="mb-3">ブックマーク一覧</h1>
+<div class="d-flex align-items-end mb-3">
+  <h1 class="mb-0 me-3">ブックマーク一覧</h1>
+  <%= link_to "(ブックマークを作成)", new_bookmark_path %>
+</div>
 <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xxl-4 g-2">
   <% @bookmarks.each do |bookmark| %>
     <div class="col">

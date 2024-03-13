@@ -29,5 +29,6 @@ module Hoge
     config.time_zone = 'Asia/Tokyo'
     config.active_record.default_timezone = :local
     config.i18n.default_locale = :ja
+    config.action_view.field_error_proc = proc { |html_tag, _instance| html_tag }
   end
 end
