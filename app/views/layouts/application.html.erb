@@ -9,7 +9,7 @@
     <%= javascript_importmap_tags %>
   </head>
   <body>
-    <section class="container py-3">
+    <section class="container pt-3">
       <%= render "header", user: @user %>
       <% if flash[:notice] %>
         <div class="alert alert-info" role="alert"><%= notice %></div>
@@ -17,7 +17,10 @@
       <% if flash[:alert] %>
         <div class="alert alert-warning" role="alert"><%= alert %></div>
       <% end %>
-      <%= yield %>
+      <div class="mb-5">
+        <%= yield %>
+      </div>
+      <%= render "footer" %>
     </section>
   </body>
 </html>
