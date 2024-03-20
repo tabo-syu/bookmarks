@@ -3,7 +3,6 @@
 <% @tags.each do |tag| %>
   <ul>
     <li><%= link_to 'name: ' + tag.name, tag %></li>
-    <li>color: <%= tag.color %></li>
     <dl>
       <dt>Bookmarks:</dt>
       <% tag.bookmarks.each do |bookmark| %>
