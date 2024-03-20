@@ -1,29 +1,35 @@
 <%= form_with model: bookmark do |form| %>
-  <div>
-    <%= form.label :url %>:
-    <%= form.text_field :url %>
+  <div class="form-floating mb-3">
+    <%= form.text_field :url, class: ["form-control"]%>
+    <%= form.label :url, "URL" %>
     <% bookmark.errors.full_messages_for(:url).each do |message| %>
-      <div><%= message %></div>
+      <p class="text-danger"><%= message %></p>
     <% end %>
   </div>
-  <div>
-    <%= form.label :title %>:
-    <%= form.text_field :title %>
+  <div class="form-floating mb-3">
+    <%= form.text_field :title, class: ["form-control"] %>
+    <%= form.label :title, "タイトル" %>
     <% bookmark.errors.full_messages_for(:title).each do |message| %>
-      <div><%= message %></div>
+      <p class="text-danger"><%= message %></p>
     <% end %>
   </div>
-  <div>
-    <%= form.label :description %>:
-    <%= form.text_field :description %>
+  <div class="form-floating mb-3">
+    <%= form.text_field :description, class: ["form-control"] %>
+    <%= form.label :description, "詳細" %>
     <% bookmark.errors.full_messages_for(:description).each do |message| %>
-      <div><%= message %></div>
+      <p class="text-danger"><%= message %></p>
     <% end %>
   </div>
-  <div>
-    <%= form.collection_check_boxes :tag_ids, Tag.all, :id, :name %>
+  <div class="form-floating mb-3">
+    <p class="mb-2">タグ</p>
+    <%= form.collection_check_boxes :tag_ids, Tag.all, :id, :name do |b| %>
+      <div class="form-check form-check-inline">
+        <%= b.check_box class: ["form-check-input"] %>
+        <%= b.label class: ["form-check-label"] %>
+      </div>
+    <% end %>
   </div>
-  <div>
+  <div class="actions mb-3">
     <%= form.submit %>
   </div>
 <% end %>
