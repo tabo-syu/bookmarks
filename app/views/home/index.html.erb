@@ -28,7 +28,7 @@
               </div>
             </div>
             <div class="card-footer text-end" style="font-size: 10px">
-              <span class="mr-1"><%= bookmark.user.email %></span>
+              <span class="mr-1"><%= bookmark.user.name %></span>
               <time datetime="<%= bookmark.created_at.to_datetime.iso8601 %>"><%= l bookmark.created_at %></time>
             </div>
           </article>
