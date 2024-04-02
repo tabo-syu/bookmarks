@@ -8,10 +8,4 @@
     } %>
   </li>
 </ul>
-<% @tag.bookmarks.each do |bookmark| %>
-  <ul>
-    <li>URL: <%= bookmark.url %></li>
-    <li>Title: <%= bookmark.title %></li>
-    <li>Description: <%= bookmark.description %></li>
-  </ul>
-<% end %>
+<%= render "home/bookmarks", bookmarks: @tag.bookmarks %>

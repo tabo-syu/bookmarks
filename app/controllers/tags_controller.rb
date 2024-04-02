@@ -7,7 +7,7 @@ class TagsController < ApplicationController
   end
 
   def show
-    @tag = Tag.find(params[:id])
+    @tag = Tag.preload(bookmarks: %i[tags user]).find(params[:id])
   end
 
   # Create
