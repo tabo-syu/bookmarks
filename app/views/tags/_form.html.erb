@@ -1,12 +1,12 @@
 <%= form_with model: tag do |form| %>
-  <div>
-    <%= form.label :name %>:
-    <%= form.text_field :name %>
+  <div class="form-floating mb-3">
+    <%= form.text_field :name, class: ["form-control"] %>
+    <%= form.label :name, "名前" %>
     <% tag.errors.full_messages_for(:name).each do |message| %>
-      <div><%= message %></div>
+      <p class="text-danger"><%= message %></p>
     <% end %>
   </div>
-  <div>
+  <div class="actions mb-3">
     <%= form.submit %>
   </div>
 <% end %>
