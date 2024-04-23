@@ -26,7 +26,16 @@
       <% @bookmark.comments.each do |comment| %>
         <article class="list-group-item py-4">
           <dl class="mb-0">
-            <dt class="mb-3"><%= comment.user.name %><span class="ms-2 text-body-tertiary small fw-normal">(<%= l comment.created_at %>)</span></dt>
+            <dt class="mb-3">
+              <%= comment.user.name %>
+              <span class="ms-2 text-body-tertiary small fw-normal">(<%= l comment.created_at %>)</span>
+              <% if current_user == comment.user %>
+                <%= link_to "削除", bookmark_comment_path(@bookmark, comment), data: {
+                  turbo_method: :delete,
+                  turbo_confirm: "本当に削除しますか？"
+                }, class: ["ms-1", "small"] %>
+              <% end %>
+            </dt>
             <dd class="small lh-lg mb-0"><%= comment.body %></dd>
           </dl>
         </article>
