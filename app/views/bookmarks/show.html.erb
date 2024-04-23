@@ -3,6 +3,12 @@
     <div class="mb-3">
       <h1 class="display-5 fw-bold my-0 text-body-emphasis"><%= @bookmark.title %></h1>
       <a class="text-body-tertiary" href="<%= @bookmark.url %>" target="_blank"><%= @bookmark.url %></a>
+      <% if current_user == @bookmark.user %>
+        （<%= link_to "削除", bookmark_path(@bookmark), data: {
+          turbo_method: :delete,
+          turbo_confirm: "本当に削除しますか？"
+        } %>）
+      <% end %>
     </div>
     <p class="col-md-8 fs-5 mb-0"><%= @bookmark.description %></p>
     <div class="d-lg-flex justify-content-between align-items-center mt-4">
