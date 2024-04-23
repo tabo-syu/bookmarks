@@ -1,11 +1,7 @@
-<h1><%= @tag.name %></h1>
-<ul>
-  <li><%= link_to "Edit", edit_tag_path(@tag) %></li>
-  <li>
-    <%= link_to "Destroy", tag_path(@tag), data: {
-      turbo_method: :delete,
-      turbo_confirm: "Are you sure?"
-    } %>
-  </li>
-</ul>
+<h1 class="d-inline-block"><%= @tag.name %></h1>
+（<%= link_to "編集", edit_tag_path(@tag) %>
+<%= link_to "削除", tag_path(@tag), data: {
+  turbo_method: :delete,
+  turbo_confirm: "本当に削除しますか？"
+} %>）
 <%= render "home/bookmarks", bookmarks: @tag.bookmarks %>
