@@ -1,3 +1,6 @@
+require 'nokogiri'
+require 'open-uri'
+
 class BookmarksController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
 
@@ -17,6 +20,10 @@ class BookmarksController < ApplicationController
 
   def create
     @bookmark = current_user.bookmarks.new(bookmark_params)
+
+    doc = Nokogiri::HTML(URI.parse(@bookmark.url).open, nil, 'UTF-8')
+    @bookmark.title = doc.title
+    @bookmark.description = doc.css('//meta[name$="description"]/@content').to_s
 
     if @bookmark.save
       redirect_to @bookmark
@@ -51,6 +58,6 @@ class BookmarksController < ApplicationController
   private
 
   def bookmark_params
-    params.require(:bookmark).permit(:title, :url, :description, tag_ids: [])
+    params.require(:bookmark).permit(:url, tag_ids: [])
   end
 end
