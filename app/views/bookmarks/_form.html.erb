@@ -7,20 +7,6 @@
     <% end %>
   </div>
   <div class="form-floating mb-3">
-    <%= form.text_field :title, class: ["form-control"] %>
-    <%= form.label :title, "タイトル" %>
-    <% bookmark.errors.full_messages_for(:title).each do |message| %>
-      <p class="text-danger"><%= message %></p>
-    <% end %>
-  </div>
-  <div class="form-floating mb-3">
-    <%= form.text_field :description, class: ["form-control"] %>
-    <%= form.label :description, "詳細" %>
-    <% bookmark.errors.full_messages_for(:description).each do |message| %>
-      <p class="text-danger"><%= message %></p>
-    <% end %>
-  </div>
-  <div class="form-floating mb-3">
     <p class="mb-2">タグ</p>
     <%= form.collection_check_boxes :tag_ids, Tag.all, :id, :name do |b| %>
       <div class="form-check form-check-inline">

@@ -2,14 +2,14 @@
   <div class="col-xl-10 mb-5 mb-xl-0">
     <div class="d-flex align-items-end mb-3">
       <h1 class="mb-0 me-3">ブックマーク一覧</h1>
-      <%= link_to "(ブックマークを作成)", new_bookmark_path %>
+      (<%= link_to "ブックマークを作成", new_bookmark_path %>)
     </div>
     <%= render "bookmarks", bookmarks: @bookmarks %>
   </div>
   <div class="col-xl-2 mb-5 mb-xl-0">
     <div class="d-flex align-items-end mb-3">
       <h2 class="h1 mb-0 me-3">タグ</h2>
-      <%= link_to "(タグを作成)", new_tag_path %>
+      (<%= link_to "タグを作成", new_tag_path %>)
     </div>
     <div>
       <% @tags.each do |tag| %>
