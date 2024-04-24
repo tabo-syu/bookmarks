@@ -27,7 +27,7 @@
   </div>
 </section>
 <section>
-  <% if @bookmark.comments.length > 1 %>
+  <% if @bookmark.comments_count > 0 %>
     <h2>ブックマークへのコメント</h2>
     <div class="list-group list-group-flush mb-3">
       <% @bookmark.comments.each do |comment| %>

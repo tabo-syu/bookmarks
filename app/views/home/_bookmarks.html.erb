@@ -12,12 +12,17 @@
             </p>
             <p class="card-text small"><%= bookmark.description %></p>
           </div>
-          <div>
-            <% bookmark.tags.each do |tag| %>
-              <span class="badge text-bg-secondary fw-light">
-                <%= link_to tag.name, tag, class: ['link-body-emphasis', 'link-underline-opacity-0', 'link-underline-opacity-75-hover'] %>
-              </span>
-            <% end %>
+          <div class="d-flex justify-content-between align-items-end">
+            <div>
+              <% bookmark.tags.each do |tag| %>
+                <span class="badge text-bg-secondary fw-light">
+                  <%= link_to tag.name, tag, class: ['link-body-emphasis', 'link-underline-opacity-0', 'link-underline-opacity-75-hover'] %>
+                </span>
+              <% end %>
+            </div>
+            <p class="my-0" style="font-size: 12px">
+              コメント: <%= bookmark.comments_count %>件
+            </p>
           </div>
         </div>
         <div class="card-footer text-end" style="font-size: 10px">

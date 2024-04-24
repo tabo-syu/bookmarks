@@ -6,7 +6,7 @@ class BookmarksController < ApplicationController
 
   # Read
   def index
-    @bookmarks = Bookmark.preload(:tags)
+    @bookmarks = Bookmark.preload(%i[tags comments])
   end
 
   def show
