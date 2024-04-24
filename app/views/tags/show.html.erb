@@ -1,7 +1,9 @@
 <h1 class="d-inline-block"><%= @tag.name %></h1>
-（<%= link_to "編集", edit_tag_path(@tag) %>
-<%= link_to "削除", tag_path(@tag), data: {
+<% if current_user == @tag.user %>
+  （<%= link_to "編集", edit_tag_path(@tag) %> / 
+  <%= link_to "削除", tag_path(@tag), data: {
   turbo_method: :delete,
   turbo_confirm: "本当に削除しますか？"
 } %>）
+<% end %>
 <%= render "home/bookmarks", bookmarks: @tag.bookmarks %>
