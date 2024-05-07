@@ -26,6 +26,11 @@ class BookmarksController < ApplicationController
     @bookmark.description = doc.css('//meta[name$="description"]/@content').to_s
 
     if @bookmark.save
+      Bot.send_message(
+        Rails.application.credentials.discord.channel_id,
+        "新しいブックマークが登録されました！\nURL: #{@bookmark.url}\nTitle: #{@bookmark.title}\nDescription: #{@bookmark.description}"
+      )
+
       redirect_to @bookmark
     else
       render :new, status: :unprocessable_entity

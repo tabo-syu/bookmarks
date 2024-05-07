@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '3.3.0'
+ruby '3.3.1'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.1.3', '>= 7.1.3.2'
@@ -59,6 +59,8 @@ gem 'dartsass-sprockets'
 gem 'rails-i18n', '~> 7.0.0'
 
 gem 'nokogiri'
+
+gem 'discordrb'
 
 gem 'counter_culture', '~> 3.2'
 
