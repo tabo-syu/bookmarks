@@ -21,9 +21,15 @@ class BookmarksController < ApplicationController
   def create
     @bookmark = current_user.bookmarks.new(bookmark_params)
 
-    doc = Nokogiri::HTML(URI.parse(@bookmark.url).open, nil, 'UTF-8')
-    @bookmark.title = doc.title
-    @bookmark.description = doc.css('//meta[name$="description"]/@content').to_s
+    begin
+      uri = URI.parse(@bookmark.url)
+      doc = Nokogiri::HTML(uri.open, nil, 'UTF-8')
+      @bookmark.title = doc.title
+      @bookmark.description = doc.css('//meta[name$="description"]/@content').to_s
+    rescue StandardError => e
+      @bookmark.errors.add(:url, '無効なURL')
+      render :new, status: :unprocessable_entity and return
+    end
 
     if @bookmark.save
       Bot.send_message(

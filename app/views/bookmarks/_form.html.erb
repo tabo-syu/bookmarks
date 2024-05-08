@@ -2,7 +2,7 @@
   <div class="form-floating mb-3">
     <%= form.text_field :url, class: ["form-control"]%>
     <%= form.label :url, "URL" %>
-    <% bookmark.errors.full_messages_for(:url).each do |message| %>
+    <% bookmark.errors.messages_for(:url).each do |message| %>
       <p class="text-danger"><%= message %></p>
     <% end %>
   </div>
