@@ -34,7 +34,7 @@ class BookmarksController < ApplicationController
     if @bookmark.save
       Bot.send_message(
         Rails.application.credentials.discord.channel_id,
-        "新しいブックマークが登録されました！\nURL: #{@bookmark.url}\nTitle: #{@bookmark.title}\nDescription: #{@bookmark.description}"
+        "新しいブックマークが登録されました！\n#{@bookmark.url}"
       )
 
       redirect_to @bookmark
