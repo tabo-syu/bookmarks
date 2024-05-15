@@ -8,6 +8,8 @@
 ```console
 $ nvm install --lts
 
+$ bundle install
+
 // Edit credentials
 $ EDITOR="code --wait" bin/rails credentials:edit
 # aws:
