@@ -25,3 +25,9 @@ secret_key_base: xxxxx
 // Run development server
 $ rails s
 ```
+
+## Deploy
+
+1. `docker compose build --no-cache`
+1. `docker compose down`
+1. `docker compose up -d`
