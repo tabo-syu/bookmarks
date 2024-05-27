@@ -5,6 +5,17 @@ class CommentsController < ApplicationController
     @bookmark = Bookmark.find(params[:bookmark_id])
     @comment = @bookmark.comments.create(comment_params.merge(user: current_user))
 
+    Bot.send_message(
+      Rails.application.credentials.discord.channel_id,
+      <<-EOS
+**新しいコメントが投稿されました！**
+
+> #{current_user.name}: #{@comment.body}
+
+#{@bookmark.url}
+      EOS
+    )
+
     redirect_to bookmark_path(@bookmark)
   end
 
