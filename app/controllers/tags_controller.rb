@@ -3,11 +3,12 @@ class TagsController < ApplicationController
 
   # Read
   def index
-    @tags = Tag.preload(:bookmarks)
+    @tags = Tag.order(created_at: :desc).preload(:bookmarks)
   end
 
   def show
-    @tag = Tag.preload(bookmarks: %i[tags user]).find(params[:id])
+    @tag = Tag.find(params[:id])
+    @bookmarks = @tag.bookmarks.order(created_at: :desc).preload(%i[tags user])
   end
 
   # Create

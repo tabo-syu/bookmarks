@@ -2,7 +2,7 @@
   <h1><%= link_to "Bookmarks", root_path, class: ['text-decoration-none', 'link-body-emphasis'] %></h1>
   <nav class="d-inline-flex mt-md-0 ms-auto">
     <% if current_user %>
-      <span class="me-3 py-1 body-emphasis"><%= user.name %></span>
+      <%= link_to current_user.name, user_path(current_user), class: ['me-3', 'py-1', 'link-body-emphasis'] %>
       <%= link_to "ログアウト", destroy_user_session_path, class: ['py-1', 'text-decoration-none', 'link-body-emphasis'], data: {
         turbo_method: :delete
       } %>
