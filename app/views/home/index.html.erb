@@ -20,8 +20,4 @@
     </div>
   </div>
 </div>
-<div class="d-flex justify-content-center">
-  <div>
-    <%= paginate @bookmarks, theme: 'bootstrap-5' %>
-  </div>
-</div>
+<%= render partial: 'components/pagination' %>
