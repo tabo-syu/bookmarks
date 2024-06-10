@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row pb-5">
   <div class="col-xl-10 mb-5 mb-xl-0">
     <div class="d-flex align-items-end mb-3">
       <h1 class="mb-0 me-3">ブックマーク一覧</h1>
@@ -6,7 +6,6 @@
     </div>
     <%= render "shared/bookmarks", bookmarks: @bookmarks %>
   </div>
-  <%= paginate @bookmarks, theme: 'bootstrap-5' %>
   <div class="col-xl-2 mb-5 mb-xl-0">
     <div class="d-flex align-items-end mb-3">
       <h2 class="h1 mb-0 me-3">タグ</h2>
@@ -19,5 +18,10 @@
         </span>
       <% end %>
     </div>
+  </div>
+</div>
+<div class="d-flex justify-content-center">
+  <div>
+    <%= paginate @bookmarks, theme: 'bootstrap-5' %>
   </div>
 </div>
