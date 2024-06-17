@@ -6,7 +6,7 @@ class BookmarksController < ApplicationController
 
   # Read
   def index
-    @bookmarks = Bookmark.order(created_at: :desc).preload(%i[tags comments])
+    @bookmarks = Bookmark.order(created_at: :desc).preload(%i[tags comments]).page(params[:page])
   end
 
   def show

@@ -8,7 +8,7 @@ class TagsController < ApplicationController
 
   def show
     @tag = Tag.find(params[:id])
-    @bookmarks = @tag.bookmarks.order(created_at: :desc).preload(%i[tags user])
+    @bookmarks = @tag.bookmarks.order(created_at: :desc).preload(%i[tags user]).page(params[:page])
   end
 
   # Create
