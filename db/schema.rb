@@ -10,60 +10,60 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 20_240_424_135_948) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_24_135948) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension 'plpgsql'
+  enable_extension "plpgsql"
 
-  create_table 'bookmarks', force: :cascade do |t|
-    t.text 'url', null: false
-    t.text 'title', null: false
-    t.text 'description', null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.bigint 'user_id', null: false
-    t.integer 'comments_count', default: 0, null: false
-    t.index ['user_id'], name: 'index_bookmarks_on_user_id'
+  create_table "bookmarks", force: :cascade do |t|
+    t.text "url", null: false
+    t.text "title", null: false
+    t.text "description", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.integer "comments_count", default: 0, null: false
+    t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
 
-  create_table 'bookmarks_tags', id: false, force: :cascade do |t|
-    t.bigint 'bookmark_id'
-    t.bigint 'tag_id'
-    t.index ['bookmark_id'], name: 'index_bookmarks_tags_on_bookmark_id'
-    t.index ['tag_id'], name: 'index_bookmarks_tags_on_tag_id'
+  create_table "bookmarks_tags", id: false, force: :cascade do |t|
+    t.bigint "bookmark_id"
+    t.bigint "tag_id"
+    t.index ["bookmark_id"], name: "index_bookmarks_tags_on_bookmark_id"
+    t.index ["tag_id"], name: "index_bookmarks_tags_on_tag_id"
   end
 
-  create_table 'comments', force: :cascade do |t|
-    t.text 'body', null: false
-    t.bigint 'bookmark_id', null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.bigint 'user_id', null: false
-    t.index ['bookmark_id'], name: 'index_comments_on_bookmark_id'
-    t.index ['user_id'], name: 'index_comments_on_user_id'
+  create_table "comments", force: :cascade do |t|
+    t.text "body", null: false
+    t.bigint "bookmark_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["bookmark_id"], name: "index_comments_on_bookmark_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table 'tags', force: :cascade do |t|
-    t.string 'name', null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.bigint 'user_id', null: false
-    t.index ['user_id'], name: 'index_tags_on_user_id'
+  create_table "tags", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_tags_on_user_id"
   end
 
-  create_table 'users', force: :cascade do |t|
-    t.string 'encrypted_password', default: '', null: false
-    t.string 'reset_password_token'
-    t.datetime 'reset_password_sent_at'
-    t.datetime 'remember_created_at'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.string 'name', default: '', null: false
-    t.index ['name'], name: 'index_users_on_name', unique: true
-    t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
+  create_table "users", force: :cascade do |t|
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name", default: "", null: false
+    t.index ["name"], name: "index_users_on_name", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key 'bookmarks', 'users'
-  add_foreign_key 'comments', 'bookmarks'
-  add_foreign_key 'comments', 'users'
-  add_foreign_key 'tags', 'users'
+  add_foreign_key "bookmarks", "users"
+  add_foreign_key "comments", "bookmarks"
+  add_foreign_key "comments", "users"
+  add_foreign_key "tags", "users"
 end
