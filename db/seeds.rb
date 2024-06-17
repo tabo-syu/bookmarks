@@ -5,8 +5,8 @@
 #
 
 User.create!(
-  encrypted_password: '$2a$12$WLORkOA0eGp8gbG7YG7PG.Y94vMgngyNH1ZwcI1PUqoi80MkwFEZu',
-  name: 'password'
+  password: 'password',
+  name: 'test_user',
 )
 
 Tag.create!(
