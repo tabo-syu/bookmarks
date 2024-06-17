@@ -16,10 +16,12 @@ class BookmarksController < ApplicationController
   # Create
   def new
     @bookmark = Bookmark.new
+    @bookmark.comments.build
   end
 
   def create
     @bookmark = current_user.bookmarks.new(bookmark_params)
+    @bookmark.comments.each { |comment| comment.user = current_user }
 
     begin
       uri = URI.parse(@bookmark.url)
@@ -36,9 +38,18 @@ class BookmarksController < ApplicationController
     end
 
     if @bookmark.save
+      message = "新しいブックマークが登録されました！\n#{@bookmark.url}"
+
+      if @bookmark.comments.size > 0
+        message << "\nコメント : "
+      end
+      @bookmark.comments.each do |comment|
+        message << "#{comment.body}\n"
+      end
+
       Bot.send_message(
         Rails.application.credentials.discord.channel_id,
-        "新しいブックマークが登録されました！\n#{@bookmark.url}"
+        message,
       )
 
       redirect_to @bookmark
@@ -73,6 +84,6 @@ class BookmarksController < ApplicationController
   private
 
   def bookmark_params
-    params.require(:bookmark).permit(:url, tag_ids: [])
+    params.require(:bookmark).permit(:url, tag_ids: [], comments_attributes: [:body])
   end
 end
