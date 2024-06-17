@@ -23,9 +23,13 @@ class BookmarksController < ApplicationController
 
     begin
       uri = URI.parse(@bookmark.url)
+
       doc = Nokogiri::HTML(uri.open, nil, 'UTF-8')
-      @bookmark.title = doc.title
-      @bookmark.description = doc.css('//meta[name$="description"]/@content').to_s
+      title = doc.title
+      desc = doc.css('//meta[name$="description"]/@content').to_s
+
+      @bookmark.title = title
+      @bookmark.description = desc.empty? ? title : desc 
     rescue StandardError => e
       @bookmark.errors.add(:url, '無効なURL')
       render :new, status: :unprocessable_entity and return
