@@ -15,6 +15,14 @@
       </div>
     <% end %>
   </div>
+  <div class="form-floating mb-3">
+    <p class="mb-2">コメント</p>
+    <%= form.fields_for :comments do |comment_form| %>
+      <div>
+        <%= comment_form.text_area :body, class: ["form-control", "form-control-sm"], rows: 5, placeholder: "コメントを入力してください" %>
+      </div>
+    <% end %>
+  </div>
   <div class="actions mb-3">
     <%= form.submit %>
   </div>
