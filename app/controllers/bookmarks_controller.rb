@@ -31,7 +31,7 @@ class BookmarksController < ApplicationController
       desc = doc.css('//meta[name$="description"]/@content').to_s
 
       @bookmark.title = title
-      @bookmark.description = desc.empty? ? title : desc 
+      @bookmark.description = desc.empty? ? title : desc
     rescue StandardError => e
       @bookmark.errors.add(:url, '無効なURL')
       render :new, status: :unprocessable_entity and return
@@ -40,16 +40,14 @@ class BookmarksController < ApplicationController
     if @bookmark.save
       message = "新しいブックマークが登録されました！\n#{@bookmark.url}"
 
-      if @bookmark.comments.size > 0
-        message << "\nコメント : "
-      end
+      message << "\nコメント : " if @bookmark.comments.size > 0
       @bookmark.comments.each do |comment|
         message << "#{comment.body}\n"
       end
 
       Bot.send_message(
         Rails.application.credentials.discord.channel_id,
-        message,
+        message
       )
 
       redirect_to @bookmark
