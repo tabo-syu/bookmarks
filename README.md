@@ -32,7 +32,7 @@ $ rails s
 1. `docker compose down`
 1. `docker compose up -d`
 
-## Backup & Backup
+## Backup & Restore
 
 Backup
 
