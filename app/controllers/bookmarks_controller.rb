@@ -22,6 +22,7 @@ class BookmarksController < ApplicationController
   def create
     @bookmark = current_user.bookmarks.new(bookmark_params)
     @bookmark.comments.each { |comment| comment.user = current_user }
+    @bookmark.comments = @bookmark.comments.filter { |comment| !comment.body.empty? }
 
     begin
       uri = URI.parse(@bookmark.url)
