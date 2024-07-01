@@ -31,3 +31,19 @@ $ rails s
 1. `docker compose build --no-cache`
 1. `docker compose down`
 1. `docker compose up -d`
+
+## Backup & Restore
+
+Backup
+
+```console
+$ chmod +x backup.sh
+$ crontab -e
+0 2 * * * /path/to/your/project/backup.sh
+```
+
+Restore
+
+```console
+$ docker run --rm -v bookmarks-rails_postgres-data:/volume -v $(pwd):/backup busybox tar xvf /backup/postgres-data_backup.tar -C /
+```
