@@ -1,0 +1,2 @@
+module DiscordRecipientsHelper
+end

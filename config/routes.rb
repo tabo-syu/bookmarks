@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   end
   resources :tags
   resources :users, only: [:show]
+  resources :discord_recipients
 end

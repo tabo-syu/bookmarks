@@ -1,0 +1,9 @@
+<h1>通知の送信設定</h1>
+<ul>
+  <li><%= link_to "新しい通知設定", new_discord_recipient_path %></li>
+</ul>
+<ul>
+  <% @recipients.each do |recipient| %>
+    <li>url: <%= recipient.channel_id %></li>
+  <% end %>
+</ul>
