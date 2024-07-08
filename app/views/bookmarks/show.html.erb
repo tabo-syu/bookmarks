@@ -43,7 +43,7 @@
                 }, class: ["ms-1", "small"] %>
               <% end %>
             </dt>
-            <dd class="small lh-lg mb-0"><%= comment.body %></dd>
+            <dd class="small lh-lg mb-0"><%= markdown(comment.body) %></dd>
           </dl>
         </article>
       <% end %>

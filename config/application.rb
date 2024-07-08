@@ -30,5 +30,9 @@ module Hoge
     config.active_record.default_timezone = :local
     config.i18n.default_locale = :ja
     config.action_view.field_error_proc = proc { |html_tag, _instance| html_tag }
+
+    config.action_view.sanitized_allowed_tags = Loofah::HTML5::SafeList::ALLOWED_ELEMENTS
+    config.action_view.sanitized_allowed_attributes = Loofah::HTML5::SafeList::ALLOWED_ATTRIBUTES
+
   end
 end
