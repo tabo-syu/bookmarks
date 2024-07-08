@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_24_135948) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_08_163226) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_24_135948) do
     t.bigint "user_id", null: false
     t.index ["bookmark_id"], name: "index_comments_on_bookmark_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "discord_recipients", force: :cascade do |t|
+    t.string "channel_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "discord_recipients_tags", id: false, force: :cascade do |t|
+    t.bigint "discord_recipient_id"
+    t.bigint "tag_id"
+    t.index ["discord_recipient_id"], name: "index_discord_recipients_tags_on_discord_recipient_id"
+    t.index ["tag_id"], name: "index_discord_recipients_tags_on_tag_id"
   end
 
   create_table "tags", force: :cascade do |t|
