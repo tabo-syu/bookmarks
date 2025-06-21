@@ -1,0 +1,110 @@
+<div class="table-responsive">
+  <table class="table table-hover align-middle">
+    <thead class="table-light">
+      <tr>
+        <th scope="col" class="sortable-header">
+          <%= link_to bookmarks_path(view: @view_mode, tag_filter: @current_tag, 
+                                    sort: 'title', 
+                                    direction: (@sort_column == 'title' && @sort_direction == 'asc') ? 'desc' : 'asc'),
+                      class: "text-decoration-none text-dark d-flex align-items-center" do %>
+            <i class="bi bi-type me-2"></i>
+            タイトル
+            <% if @sort_column == 'title' %>
+              <i class="bi bi-chevron-<%=@sort_direction == 'asc' ? 'up' : 'down'%> ms-2"></i>
+            <% end %>
+          <% end %>
+        </th>
+        <th scope="col">
+          <i class="bi bi-link-45deg me-2"></i>URL
+        </th>
+        <th scope="col">
+          <i class="bi bi-tags me-2"></i>タグ
+        </th>
+        <th scope="col" class="sortable-header">
+          <%= link_to bookmarks_path(view: @view_mode, tag_filter: @current_tag, 
+                                    sort: 'created_at', 
+                                    direction: (@sort_column == 'created_at' && @sort_direction == 'desc') ? 'asc' : 'desc'),
+                      class: "text-decoration-none text-dark d-flex align-items-center" do %>
+            <i class="bi bi-calendar me-2"></i>
+            作成日
+            <% if @sort_column == 'created_at' %>
+              <i class="bi bi-chevron-<%=@sort_direction == 'asc' ? 'up' : 'down'%> ms-2"></i>
+            <% end %>
+          <% end %>
+        </th>
+        <th scope="col" class="sortable-header">
+          <%= link_to bookmarks_path(view: @view_mode, tag_filter: @current_tag, 
+                                    sort: 'comments_count', 
+                                    direction: (@sort_column == 'comments_count' && @sort_direction == 'desc') ? 'asc' : 'desc'),
+                      class: "text-decoration-none text-dark d-flex align-items-center" do %>
+            <i class="bi bi-chat me-2"></i>
+            コメント
+            <% if @sort_column == 'comments_count' %>
+              <i class="bi bi-chevron-<%=@sort_direction == 'asc' ? 'up' : 'down'%> ms-2"></i>
+            <% end %>
+          <% end %>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @bookmarks.each do |bookmark| %>
+        <tr class="bookmark-row">
+          <td class="fw-semibold">
+            <%= link_to bookmark.title, bookmark, class: "text-decoration-none bookmark-title" %>
+          </td>
+          <td class="text-muted">
+            <div class="url-cell">
+              <%= link_to bookmark.url, bookmark.url, target: "_blank", class: "text-decoration-none small" do %>
+                <%= truncate(bookmark.url, length: 40) %>
+                <i class="bi bi-arrow-up-right-square ms-1"></i>
+              <% end %>
+            </div>
+          </td>
+          <td>
+            <div class="tags-cell">
+              <% bookmark.tags.each do |tag| %>
+                <%= link_to bookmarks_path(view: @view_mode, tag_filter: tag.name, sort: @sort_column, direction: @sort_direction),
+                            class: "badge bg-primary text-decoration-none me-1 tag-badge" do %>
+                  <%= tag.name %>
+                <% end %>
+              <% end %>
+            </div>
+          </td>
+          <td class="text-muted">
+            <div class="date-cell">
+              <i class="bi bi-calendar3 me-1"></i>
+              <%= bookmark.created_at.strftime("%Y年%m月%d日") %>
+            </div>
+          </td>
+          <td class="text-center">
+            <% if bookmark.comments_count > 0 %>
+              <span class="badge bg-info">
+                <i class="bi bi-chat-fill me-1"></i>
+                <%= bookmark.comments_count %>
+              </span>
+            <% else %>
+              <span class="text-muted">0</span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<% if @bookmarks.empty? %>
+  <div class="text-center py-5">
+    <div class="mb-3">
+      <i class="bi bi-bookmark display-4 text-muted"></i>
+    </div>
+    <h5 class="text-muted">ブックマークが見つかりません</h5>
+    <p class="text-muted">
+      <% if @current_tag.present? %>
+        「<%= @current_tag %>」タグのブックマークが見つかりません。
+      <% else %>
+        まだブックマークがありません。
+      <% end %>
+    </p>
+    <%= link_to "新規ブックマークを作成", new_bookmark_path, class: "btn btn-primary" %>
+  </div>
+<% end %>
