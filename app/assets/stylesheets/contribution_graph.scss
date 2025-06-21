@@ -1,0 +1,90 @@
+.contribution-graph {
+  .contribution-grid {
+    display: flex;
+    gap: 2px;
+    overflow-x: auto;
+    padding: 4px 0;
+  }
+  
+  .contribution-week {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .contribution-day {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    background-color: var(--bs-gray-800);
+    border: 1px solid var(--bs-gray-700);
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+    
+    &:hover {
+      border-color: var(--bs-gray-500);
+    }
+    
+    // Activity levels with green shades for dark theme
+    &.level-0 {
+      background-color: var(--bs-gray-800);
+    }
+    
+    &.level-1 {
+      background-color: #0d4429;
+    }
+    
+    &.level-2 {
+      background-color: #006d32;
+    }
+    
+    &.level-3 {
+      background-color: #26a641;
+    }
+    
+    &.level-4 {
+      background-color: #39d353;
+    }
+  }
+  
+  .contribution-legend {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    color: var(--bs-gray-400);
+    
+    .legend-squares {
+      display: flex;
+      gap: 2px;
+      
+      .contribution-day {
+        width: 8px;
+        height: 8px;
+      }
+    }
+    
+    .legend-text {
+      font-size: 0.75rem;
+    }
+  }
+}
+
+// Responsive positioning
+@media (max-width: 1199.98px) {
+  .contribution-graph-mobile {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    
+    .contribution-grid {
+      justify-content: center;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .contribution-graph-desktop {
+    position: sticky;
+    top: 1rem;
+  }
+}
