@@ -4,6 +4,9 @@
 </ul>
 <% @bookmarks.each do |bookmark| %>
   <ul>
+    <% if bookmark.og_image.attached? %>
+      <li><%= image_tag bookmark.og_image, alt: bookmark.title, style: "max-width: 200px; height: auto;" %></li>
+    <% end %>
     <li>url: <%= bookmark.url %></li>
     <li><%= link_to 'title: ' + bookmark.title, bookmark %></li>
     <li>description: <%= bookmark.description %></li>
