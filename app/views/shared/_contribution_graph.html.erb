@@ -1,0 +1,62 @@
+<div class="contribution-graph">
+  <h3 class="h6 mb-3">投稿アクティビティ</h3>
+  
+  <div class="contribution-grid">
+    <% contribution_data = contribution_graph_data %>
+    <% 
+      # Group data by week, starting from Sunday
+      weeks = []
+      current_week = []
+      start_date = contribution_data.first[:date]
+      
+      # Pad the first week if it doesn't start on Sunday
+      (start_date.wday).times do
+        current_week << nil
+      end
+      
+      contribution_data.each do |day_data|
+        current_week << day_data
+        
+        if current_week.length == 7
+          weeks << current_week
+          current_week = []
+        end
+      end
+      
+      # Pad the last week if needed
+      while current_week.length < 7 && current_week.any?
+        current_week << nil
+      end
+      
+      weeks << current_week if current_week.any?
+    %>
+    
+    <% weeks.each do |week| %>
+      <div class="contribution-week">
+        <% week.each do |day_data| %>
+          <% if day_data %>
+            <div class="contribution-day level-<%= day_data[:level] %>" 
+                 title="<%= day_data[:date].strftime('%Y年%m月%d日') %>: <%= day_data[:count] %>件の投稿"
+                 data-date="<%= day_data[:date].iso8601 %>"
+                 data-count="<%= day_data[:count] %>">
+            </div>
+          <% else %>
+            <div class="contribution-day level-0"></div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  
+  <div class="contribution-legend mt-2">
+    <span class="legend-text">少ない</span>
+    <div class="legend-squares">
+      <div class="contribution-day level-0"></div>
+      <div class="contribution-day level-1"></div>
+      <div class="contribution-day level-2"></div>
+      <div class="contribution-day level-3"></div>
+      <div class="contribution-day level-4"></div>
+    </div>
+    <span class="legend-text">多い</span>
+  </div>
+</div>

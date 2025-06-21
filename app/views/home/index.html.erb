@@ -8,6 +8,9 @@
     <%= render "shared/bookmarks", bookmarks: @bookmarks %>
   </div>
   <div class="col-xl-2 mb-5 mb-xl-0">
+    <div class="contribution-graph-desktop d-none d-xl-block mb-4">
+      <%= render "shared/contribution_graph" %>
+    </div>
     <div class="d-flex align-items-end mb-3">
       <h2 class="h1 mb-0 me-3">タグ</h2>
       (<%= link_to "タグを作成", new_tag_path %>)
@@ -20,4 +23,9 @@
       <% end %>
     </div>
   </div>
+</div>
+
+<!-- Mobile contribution graph -->
+<div class="contribution-graph-mobile d-block d-xl-none">
+  <%= render "shared/contribution_graph" %>
 </div>
