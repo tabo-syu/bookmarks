@@ -1,5 +1,10 @@
 <section class="p-5 mb-5 bg-body-tertiary border rounded-3">
   <div class="container-fluid py-5">
+    <% if @bookmark.og_image.attached? %>
+      <div class="mb-4 text-center">
+        <%= image_tag @bookmark.og_image, alt: @bookmark.title, class: "img-fluid rounded", style: "max-height: 300px;" %>
+      </div>
+    <% end %>
     <div class="mb-3">
       <h1 class="display-5 fw-bold my-0 text-body-emphasis"><%= @bookmark.title %></h1>
       <a class="text-body-tertiary" href="<%= @bookmark.url %>" target="_blank"><%= @bookmark.url %></a>
