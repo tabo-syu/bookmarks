@@ -7,6 +7,28 @@ class BookmarksController < ApplicationController
   # Read
   def index
     @bookmarks = Bookmark.order(created_at: :desc).preload(%i[tags comments]).page(params[:page])
+    @tags = Tag.joins(:bookmarks).distinct.order(:name)
+    @current_tag = params[:tag_filter]
+    @view_mode = params[:view] || 'list'
+    @sort_column = params[:sort] || 'created_at'
+    @sort_direction = params[:direction] || 'desc'
+    
+    # Filter by tag if specified
+    if @current_tag.present?
+      @bookmarks = @bookmarks.joins(:tags).where(tags: { name: @current_tag })
+    end
+    
+    # Apply sorting
+    case @sort_column
+    when 'title'
+      @bookmarks = @bookmarks.order("title #{@sort_direction}")
+    when 'comments_count'
+      @bookmarks = @bookmarks.order("comments_count #{@sort_direction}")
+    else
+      @bookmarks = @bookmarks.order("created_at #{@sort_direction}")
+    end
+    
+    @bookmarks = @bookmarks.page(params[:page])
   end
 
   def show

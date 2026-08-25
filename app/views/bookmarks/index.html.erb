@@ -1,17 +1,52 @@
-<h1>Bookmarks</h1>
-<ul>
-  <li><%= link_to "New Bookmark", new_bookmark_path %></li>
-</ul>
-<% @bookmarks.each do |bookmark| %>
-  <ul>
-    <li>url: <%= bookmark.url %></li>
-    <li><%= link_to 'title: ' + bookmark.title, bookmark %></li>
-    <li>description: <%= bookmark.description %></li>
-    <dl>
-      <dt>Tags:</dt>
-      <% bookmark.tags.each do |tag| %>
-        <dd><%= tag.name %></dd>
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1>Bookmarks</h1>
+  
+  <!-- View switcher -->
+  <div class="btn-group" role="group" aria-label="View modes">
+    <%= link_to bookmarks_path(view: 'list', tag_filter: @current_tag, sort: @sort_column, direction: @sort_direction), 
+        class: "btn #{'btn-primary' if @view_mode == 'list'} #{'btn-outline-secondary' if @view_mode != 'list'}" do %>
+      <i class="bi bi-list-ul"></i> リストビュー
+    <% end %>
+    <%= link_to bookmarks_path(view: 'table', tag_filter: @current_tag, sort: @sort_column, direction: @sort_direction), 
+        class: "btn #{'btn-primary' if @view_mode == 'table'} #{'btn-outline-secondary' if @view_mode != 'table'}" do %>
+      <i class="bi bi-table"></i> テーブルビュー
+    <% end %>
+  </div>
+</div>
+
+<!-- Add bookmark link -->
+<div class="mb-3">
+  <%= link_to "新規ブックマーク", new_bookmark_path, class: "btn btn-success" %>
+</div>
+
+<!-- Tag filter tabs -->
+<% if @tags.any? %>
+  <ul class="nav nav-tabs mb-4">
+    <li class="nav-item">
+      <%= link_to bookmarks_path(view: @view_mode, sort: @sort_column, direction: @sort_direction), 
+          class: "nav-link #{'active' if @current_tag.blank?}" do %>
+        すべて <span class="badge bg-secondary ms-1"><%= Bookmark.count %></span>
       <% end %>
-    </dl>
+    </li>
+    <% @tags.each do |tag| %>
+      <li class="nav-item">
+        <%= link_to bookmarks_path(view: @view_mode, tag_filter: tag.name, sort: @sort_column, direction: @sort_direction), 
+            class: "nav-link #{'active' if @current_tag == tag.name}" do %>
+          <%= tag.name %> <span class="badge bg-secondary ms-1"><%= tag.bookmarks.count %></span>
+        <% end %>
+      </li>
+    <% end %>
   </ul>
 <% end %>
+
+<!-- Content based on view mode -->
+<% if @view_mode == 'table' %>
+  <%= render 'table_view' %>
+<% else %>
+  <%= render 'list_view' %>
+<% end %>
+
+<!-- Pagination -->
+<div class="d-flex justify-content-center mt-4">
+  <%= paginate @bookmarks %>
+</div>
